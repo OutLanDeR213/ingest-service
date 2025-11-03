@@ -12,7 +12,7 @@ class EventCreate(BaseModel):
     occurred_at: datetime
     user_id: str
     event_type: str
-    properties: Dict[str, Any] = {}  # ✅ добавлено значение по умолчанию
+    properties: Dict[str, Any] = {}
 
 
 class EventResponse(BaseModel):

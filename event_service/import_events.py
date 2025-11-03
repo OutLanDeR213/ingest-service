@@ -76,7 +76,6 @@ def import_events(path: str, batch_size: int = 1000):
                     # Валидация через Pydantic
                     evt = EventSchema(**row)
 
-                    # Создаем ORM объект
                     event = models.Event(
                         event_id=evt.event_id,
                         occurred_at=evt.occurred_at,
@@ -103,7 +102,6 @@ def import_events(path: str, batch_size: int = 1000):
                     msg = f"[{i}] Общая ошибка: {e}\nСтрока: {row}\n"
                     error_log.write(msg + "\n")
 
-            # Сохраняем оставшиеся события
             if batch:
                 db.bulk_save_objects(batch)
                 db.commit()

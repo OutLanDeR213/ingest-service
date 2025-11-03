@@ -8,8 +8,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./data/sample:/app/data                 # рабочий CSV
-      - ./event_db_data:/app/event_service/event_db_data  # рабочая база
+      - ./data/sample:/app/data
+      - ./event_db_data:/app/event_service/event_db_data
     environment:
       - IMPORT_ON_START=true
     command: uvicorn event_service.main:app --host 0.0.0.0 --port 8000
@@ -21,8 +21,8 @@ services:
     ports:
       - "8001:8001"
     volumes:
-      - ./data/test:/app/data                   # тестовый CSV
-      - ./event_db_data:/app/event_service/event_db_data  # отдельная тестовая база
+      - ./data/test:/app/data
+      - ./event_db_data:/app/event_service/event_db_data
     environment:
       - IMPORT_ON_START=true
       - TEST_MODE=1

@@ -29,9 +29,7 @@ logger = logging.getLogger("event_service")
 # -------------------------
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # -----------------
-    # Создаём таблицы в выбранной базе
-    # -----------------
+    
     logger.info("⚙️ Создание таблиц в базе...")
     Base.metadata.create_all(bind=engine)
 
@@ -50,7 +48,7 @@ async def lifespan(app: FastAPI):
     else:
         logger.warning(f"⚠️ CSV файл не найден: {csv_path}")
 
-    yield  # приложение работает здесь
+    yield
 
 # -------------------------
 # Создание FastAPI
@@ -64,10 +62,7 @@ app.add_exception_handler(
 )
 app.add_middleware(SlowAPIMiddleware)
 
-# -------------------------
-# Пути к шаблонам и статике
-# -------------------------
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # event_service
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 templates_dir = os.path.join(BASE_DIR, "templates")
 static_dir = os.path.join(BASE_DIR, "static")
 
@@ -79,9 +74,6 @@ if not os.path.exists(static_dir):
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 templates = Jinja2Templates(directory=templates_dir)
 
-# -------------------------
-# Prometheus метрики
-# -------------------------
 Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 
 # -------------------------

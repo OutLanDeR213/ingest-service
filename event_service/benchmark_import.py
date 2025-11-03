@@ -3,7 +3,6 @@ import os
 from event_service.import_events import import_events
 
 if __name__ == "__main__":
-    # Если хочешь использовать тестовую базу:
     # os.environ["TEST_MODE"] = "1"
 
     # CSV для бенчмарка

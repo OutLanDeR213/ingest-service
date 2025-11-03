@@ -24,9 +24,8 @@ def db_session():
         yield session
     finally:
         try:
-            gen.close()  # это вызовет finally в get_db() и закроет сессию
+            gen.close()
         except Exception:
-            # на всякий случай, если генератор уже закрыт
             session.close()
 
 
@@ -67,13 +66,11 @@ def test_idempotency_post_events(db_session: Session):
         "properties": {"page": "home"},
     }
 
-    # Отправляем 2 раза подряд
     r1 = client.post("/events", json=[event])
     r2 = client.post("/events", json=[event])
 
     assert r1.status_code == 200, f"first POST failed: {r1.text}"
     assert r2.status_code == 200, f"second POST failed: {r2.text}"
 
-    # Проверяем, что в БД только 1 запись
     all_events = db_session.query(models.Event).filter(models.Event.event_id == eid).all()
     assert len(all_events) == 1, f"expected 1 event, got {len(all_events)}"

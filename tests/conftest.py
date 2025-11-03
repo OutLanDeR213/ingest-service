@@ -11,7 +11,6 @@ def test_events():
     """Фикстура, создающая несколько тестовых событий перед аналитическими тестами"""
     db: Session = next(get_db())
 
-    # Очистим таблицу перед тестом
     db.query(models.Event).delete()
     db.commit()
 
@@ -44,7 +43,6 @@ def test_events():
 
     yield
 
-    # После теста — очистим таблицу
     db.query(models.Event).delete()
     db.commit()
     db.close()
