@@ -1,5 +1,3 @@
-# event_service/schemas.py
-
 from pydantic import BaseModel, ConfigDict, field_validator
 from typing import Dict, Any
 from datetime import datetime
