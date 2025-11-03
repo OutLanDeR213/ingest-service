@@ -30,9 +30,11 @@
 
 ## 🚀 Запуск сервісу через Docker
 docker compose build -d ingest_events_app
+
 docker compose up -d ingest_events_app
 
 docker compose build -d ingest_events_test
+
 docker compose up -d ingest_events_test
 
 docker compose run --rm tests
