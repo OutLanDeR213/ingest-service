@@ -1,17 +1,17 @@
 # Event Ingest & Analytics Service
 
-Мета — збір подій (events) та базова аналітика (DAU, топ-события, retention).
+Сервис для збору подій (events) та базової аналітики (DAU, топ-события, retention).
 
-Проєкт реалізовано на **FastAPI + SQLAlchemy (SQLite) + Docker + Prometheus/Grafana**.
+Реалізовано на **FastAPI + SQLAlchemy (SQLite) + Docker + Prometheus/Grafana**.
 
 ---
 
 ## 📂 Структура проєкту
 
-- `event_service/` — код FastAPI сервісу, модулі: `main.py`, `database.py`, `crud.py`, `models.py`, `import_events.py`
+- `event_service/` — код FastAPI сервісу, модулі: `main.py`, `database.py`, `crud.py`, `models.py`, `import_events.py`, `benchmark_import.py`, `schemas.py`
 - `tests/` — unit та інтеграційні тести через `pytest`
 - `data/` — CSV-файли для інгесту (`events_sample.csv`, `events_test.csv`)
-- `docker-compose.yml` — для підняття сервісів і тестів
+- `docker-compose.yml` — підняття сервісів та тестів
 - `LEARNED.md` — досвід інтеграції FastAPI + SQLite + Docker
 - `ADR.md` — архітектурне рішення та вибір інструментів
 
@@ -30,4 +30,4 @@
 ### 1. Підняти всі сервіси (робочий + тестовий + метрики)
 
 ```bash
-docker-compose up --build
+docker compose up --build
