@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 5s
+
+scrape_configs:
+  - job_name: 'event_service'
+    static_configs:
+      - targets: ['ingest_events_app:8000']
+
